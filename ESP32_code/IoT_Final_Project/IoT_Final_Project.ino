@@ -290,11 +290,12 @@ void loop() {
     case MODE_AURORA:
       EVERY_N_MILLISECONDS(20) {
         for (int i = 0; i < NUM_LEDS; i++) {
-          uint16_t phase = i * (65536 / NUM_LEDS);
-          uint8_t h = map(sin16(millis() * 4 + phase) + 32768, 0, 65535, 140, 210);
-          uint8_t s = 220;
-          uint8_t v = beatsin8(4 + (i % 3), 30, currentBrightness, 0, i * 22);
-          leds[i] = CHSV(h, s, v);
+          // Smoothly oscillate Hue between 140 (blue-green) and 210 (purple) at 4 BPM
+          uint8_t h = beatsin8(4, 140, 210, 0, i * 21);
+          // Per-pixel shimmer: always bright (200-255), independent of currentBrightness.
+          // Global FastLED.setBrightness(currentBrightness) handles overall dimming — one layer only.
+          uint8_t v = beatsin8(5 + (i % 3), 200, 255, 0, i * 22);
+          leds[i] = CHSV(h, 220, v);
         }
         FastLED.show();
       }
