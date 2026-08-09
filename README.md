@@ -1,8 +1,27 @@
 # Smart RFID Dormitory Living System | RFID 智慧宿舍生活系統
 
+![ESP32](https://img.shields.io/badge/ESP32-Arduino_C++-E7352C?style=flat&logo=espressif&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=flat&logo=node.js&logoColor=white)
+![MQTT](https://img.shields.io/badge/MQTT-HiveMQ-660066?style=flat&logo=mqtt&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)
+
 A modern, highly integrated Internet of Things (IoT) system designed for smart student dormitory management. It combines physical security, cloud verification, instant family notification streams, and localized smart home environment controls.
 
 本專案是一個為智慧學生宿舍設計的現代化物聯網整合系統，結合了實體安全防護、雲端權限驗證、即時家長通知流，以及本地端智慧生活環境控制。
+
+---
+
+## System Architecture | 系統架構
+
+```
+ESP32 (RFID reader, RGB LEDs, servo lock)
+   │  MQTT (HiveMQ)
+   ▼
+Node.js / Express backend  ──▶  MongoDB Atlas (card whitelist, activity log)
+   │                        └─▶  Nodemailer (Gmail SMTP → parent notification)
+   ▼  Server-Sent Events (SSE)
+Web dashboard (virtual door twin, lighting control, voice commands)
+```
 
 ---
 
@@ -46,3 +65,27 @@ A modern, highly integrated Internet of Things (IoT) system designed for smart s
 *   **Backend:** Node.js, Express, Nodemailer
 *   **Database:** MongoDB Atlas (Mongoose)
 *   **Frontend:** HTML5 (Native Web Speech API), Tailwind CSS
+
+---
+
+## Repository Layout | 專案結構
+
+```
+dorm_iot_system/
+├── ESP32_code/IoT_Final_Project/   # Arduino firmware — RFID reader, RGB LED control, servo lock
+└── dorm-iot-backend/               # Express server — MQTT subscriber, MongoDB, SSE, email dispatch
+    ├── server.js                   # Entry point & SSE/MQTT wiring
+    ├── student.js / activity.js    # Card whitelist & access-log models
+    └── public/                     # Virtual door twin + lighting control dashboard
+```
+
+## Running It | 執行方式
+
+```bash
+cd dorm-iot-backend
+npm install
+# configure MONGO_URI, MQTT broker credentials, and Gmail SMTP creds in .env
+npm start
+```
+
+Flash `ESP32_code/IoT_Final_Project/IoT_Final_Project.ino` to the ESP32 via the Arduino IDE, pointing it at the same MQTT broker.
