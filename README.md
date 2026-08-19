@@ -5,9 +5,9 @@
 ![MQTT](https://img.shields.io/badge/MQTT-HiveMQ-660066?style=flat&logo=mqtt&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat&logo=mongodb&logoColor=white)
 
-A modern, highly integrated Internet of Things (IoT) system designed for smart student dormitory management. It combines physical security, cloud verification, instant family notification streams, and localized smart home environment controls.
+An Internet of Things (IoT) system for student dormitory management. It combines RFID access control, cloud verification, parent notifications, and local lighting controls.
 
-本專案是一個為智慧學生宿舍設計的現代化物聯網整合系統，結合了實體安全防護、雲端權限驗證、即時家長通知流，以及本地端智慧生活環境控制。
+本專案是一個智慧宿舍物聯網系統，結合 RFID 門禁、雲端權限驗證、家長通知，以及本地端燈光控制。
 
 ---
 
@@ -72,8 +72,8 @@ Web dashboard (virtual door twin, lighting control, voice commands)
 
 ```
 dorm_iot_system/
-├── ESP32_code/IoT_Final_Project/   # Arduino firmware — RFID reader, RGB LED control, servo lock
-└── dorm-iot-backend/               # Express server — MQTT subscriber, MongoDB, SSE, email dispatch
+├── ESP32_code/IoT_Final_Project/   # Arduino firmware: RFID reader, RGB LED control, servo lock
+└── dorm-iot-backend/               # Express server: MQTT subscriber, MongoDB, SSE, email dispatch
     ├── server.js                   # Entry point & SSE/MQTT wiring
     ├── student.js / activity.js    # Card whitelist & access-log models
     └── public/                     # Virtual door twin + lighting control dashboard
