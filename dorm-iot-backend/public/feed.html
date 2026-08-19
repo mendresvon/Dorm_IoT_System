@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Access Feed — Dorm System</title>
-  
+  <title>Live Access Feed, Dorm System</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#000000">
-  
+
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -38,7 +38,7 @@
   </style>
 </head>
 <body class="text-neutral-200 min-h-full flex flex-col relative overflow-x-hidden selection:bg-neutral-800 selection:text-white">
-  
+
   <!-- Subtle top ambient light -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[70vw] h-[15vh] rounded-full bg-rose-500/5 blur-[90px] pointer-events-none z-0"></div>
 
@@ -62,7 +62,7 @@
 
   <!-- Main Container -->
   <main class="flex-1 w-full max-w-md mx-auto px-6 pb-12 relative z-10 flex flex-col gap-5">
-    
+
     <!-- Filter Stats -->
     <div class="flex items-center gap-2">
       <span id="total-count" class="px-2.5 py-1 text-[9px] font-bold tracking-wider rounded-md bg-neutral-900 text-neutral-400 border border-neutral-800/80 font-mono">0 RECORDS</span>
@@ -107,10 +107,10 @@
       logsContainer.innerHTML = logs.map(log => {
         const time = new Date(log.timestamp).toLocaleTimeString('zh-TW', { hour12: false });
         const date = new Date(log.timestamp).toLocaleDateString('zh-TW');
-        
+
         let statusBadgeClass = 'text-neutral-400 bg-neutral-900 border-neutral-800';
         let statusIcon = 'fa-circle-info';
-        
+
         if (log.status === 'UNLOCKED') {
           statusBadgeClass = 'text-emerald-400 bg-emerald-950/20 border-emerald-900/30';
           statusIcon = 'fa-circle-check';
@@ -124,7 +124,7 @@
           statusBadgeClass = 'text-neutral-500 bg-neutral-950/40 border-neutral-950';
           statusIcon = 'fa-power-off';
         }
-        
+
         let typeIcon = 'fa-microchip';
         if (log.eventType === 'RFID Swipe') typeIcon = 'fa-id-badge';
         else if (log.eventType === 'App Button Click') typeIcon = 'fa-tablet-screen-button';

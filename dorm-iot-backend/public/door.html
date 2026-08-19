@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Door — Smart RFID Dormitory</title>
+  <title>Virtual Door, Smart RFID Dormitory</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -179,7 +179,7 @@
       border-radius: 2px;
     }
 
-    /* The door leaf — this is what rotates */
+    /* The door leaf, this is what rotates */
     .door-leaf {
       position: absolute;
       inset: 4px;
@@ -558,12 +558,12 @@
           <span class="info-name" id="info-name">Waiting for scan…</span>
           <div class="info-room-badge" id="info-room">
             <i class="fa-solid fa-door-closed" style="font-size:8px;"></i>
-            <span id="info-room-text">— —</span>
+            <span id="info-room-text">--</span>
           </div>
         </div>
         <div class="info-row">
-          <span class="info-uid" id="info-uid">UID: — — — —</span>
-          <span class="info-time" id="info-time">—</span>
+          <span class="info-uid" id="info-uid">UID: -- -- -- --</span>
+          <span class="info-time" id="info-time">, </span>
         </div>
       </div>
     </div>
@@ -710,7 +710,7 @@
     function updateInfoCard({ type, name, uid, room, timestamp }) {
       infoName.textContent     = type === 'UNLOCKED' ? name : 'Unknown Card';
       infoUID.textContent      = 'UID: ' + uid;
-      infoRoomText.textContent = room || '— —';
+      infoRoomText.textContent = room || '--';
       const t = new Date(timestamp);
       infoTime.textContent = t.toLocaleTimeString('en-US', {
         hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
@@ -764,15 +764,15 @@
         const res  = await fetch('/api/students');
         const students = await res.json();
         const presetsEl = document.getElementById('sim-presets');
-        
+
         // Generate interactive buttons for each registered student
         let html = students.map(s => {
           return `<span class="preset-chip" onclick="simulateScan('${s.uid}')">🟢 ${s.name} (${s.room})</span>`;
         }).join('');
-        
+
         // Add a card simulation button for an unknown card
         html += `<span class="preset-chip" onclick="simulateScan('DEADBEEF')">🔴 Unknown Card</span>`;
-        
+
         presetsEl.innerHTML = html;
       } catch (_) {
         document.getElementById('sim-presets').innerHTML =
@@ -818,20 +818,20 @@
       if (event) event.preventDefault();
       if (isReconnecting) return;
       isReconnecting = true;
-      
+
       const mqttDot = document.getElementById('mqtt-dot');
       const mqttLabel = document.getElementById('mqtt-label');
       const mqttBadge = document.getElementById('mqtt-badge');
-      
+
       mqttDot.style.background = '#d97706';
       mqttDot.classList.remove('live');
       mqttLabel.textContent = 'CONNECTING...';
       mqttLabel.style.color = '#d97706';
       mqttBadge.style.borderColor = 'rgba(217, 119, 6, 0.2)';
-      
+
       try {
         const res = await fetch('/api/mqtt-reconnect', { method: 'POST' });
-        
+
         let data = {};
         const contentType = res.headers.get('content-type');
         if (contentType && contentType.includes('application/json')) {
@@ -839,7 +839,7 @@
         } else {
           throw new Error(`Server returned non-JSON response (Status ${res.status}). Did you restart the server?`);
         }
-        
+
         if (res.ok && data.connected) {
           console.log('MQTT Connected successfully');
         } else {

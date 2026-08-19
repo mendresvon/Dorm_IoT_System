@@ -4,20 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart RFID Dormitory Controller</title>
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Google Fonts: Inter & JetBrains Mono for a hyper-clean developer aesthetic -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- PWA Manifest -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#000000">
-  
+
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -40,7 +40,7 @@
         box-shadow: 0 0 0 30px rgba(244, 63, 94, 0);
       }
     }
-    /* Idle mic glow — draws attention even when not active */
+    /* Idle mic glow, draws attention even when not active */
     .mic-idle-glow {
       box-shadow: 0 0 20px 4px rgba(244, 63, 94, 0.12), 0 0 60px 10px rgba(244, 63, 94, 0.06);
     }
@@ -100,7 +100,7 @@
   </style>
 </head>
 <body class="text-neutral-200 min-h-full flex flex-col relative overflow-x-hidden selection:bg-neutral-800 selection:text-white">
-  
+
   <!-- Subtle top ambient light -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[70vw] h-[15vh] rounded-full bg-rose-500/5 blur-[90px] pointer-events-none z-0"></div>
 
@@ -125,15 +125,15 @@
   <!-- Main Container -->
   <main class="flex-1 w-full max-w-md mx-auto px-6 pb-24 relative z-10 flex flex-col gap-5">
 
-    <!-- Voice Control Panel — HERO element, made to stand out -->
+    <!-- Voice Control Panel, HERO element, made to stand out -->
     <div class="luxury-panel rounded-2xl p-6 flex flex-col items-center justify-center relative transition-all duration-300">
       <span class="absolute top-4 left-4 text-[9px] font-bold tracking-widest text-neutral-500 font-mono uppercase">VOICE CONTROLLER</span>
-      
+
       <div class="text-center mt-4 mb-5">
         <p id="mic-status" class="text-[10px] text-neutral-400 font-medium tracking-wide">Tap and speak commands clearly</p>
       </div>
-      
-      <!-- Microphone — Oversized, prominent, glowing rose accent (#5) -->
+
+      <!-- Microphone, Oversized, prominent, glowing rose accent (#5) -->
       <button id="mic-btn" class="w-24 h-24 rounded-full bg-gradient-to-br from-rose-600 to-rose-700 border-2 border-rose-500/40 flex items-center justify-center text-white text-3xl shadow-lg mic-idle-glow transition-all active:scale-95 duration-200 focus:outline-none hover:from-rose-500 hover:to-rose-600">
         <i class="fa-solid fa-microphone" id="mic-icon"></i>
       </button>
@@ -145,7 +145,7 @@
       </div>
     </div>
 
-    <!-- Power & Bedtime Controls (#4 — Power Off matches Power On styling) -->
+    <!-- Power & Bedtime Controls (#4, Power Off matches Power On styling) -->
     <div class="luxury-panel rounded-2xl p-5 flex flex-col gap-3">
       <span class="text-[9px] font-bold tracking-widest text-neutral-500 font-mono uppercase mb-1">SYSTEM POWER</span>
       <div class="grid grid-cols-3 gap-2">
@@ -161,7 +161,7 @@
       </div>
     </div>
 
-    <!-- Capped Brightness Intensity Slider (#8 — now sends on input for real-time control) -->
+    <!-- Capped Brightness Intensity Slider (#8, now sends on input for real-time control) -->
     <div class="luxury-panel rounded-2xl p-5">
       <div class="flex items-center justify-between mb-3.5">
         <span class="text-[9px] font-bold tracking-widest text-neutral-500 font-mono uppercase">INTENSITY (CAPPED AT 85%)</span>
@@ -171,7 +171,7 @@
       <input type="range" id="brightness-slider" min="0" max="85" value="80">
     </div>
 
-    <!-- Modes Grid (#10 — renamed to "COLORS") -->
+    <!-- Modes Grid (#10, renamed to "COLORS") -->
     <div class="luxury-panel rounded-2xl p-5 flex flex-col gap-4">
       <div>
         <span class="text-[9px] font-bold tracking-widest text-neutral-500 font-mono uppercase mb-3 block">MODES</span>
@@ -188,7 +188,7 @@
         </div>
       </div>
 
-      <!-- Colors (#10 — renamed from "SOLID COLORS", #12 — 8th color added: orange) -->
+      <!-- Colors (#10, renamed from "SOLID COLORS", #12, 8th color added: orange) -->
       <div class="border-t border-neutral-900 pt-4">
         <span class="text-[9px] font-bold tracking-widest text-neutral-500 font-mono uppercase mb-3 block">COLORS</span>
         <div class="grid grid-cols-4 gap-2" id="color-grid">
@@ -204,7 +204,7 @@
       </div>
     </div>
 
-    <!-- Live Access Feed — Now just a navigation button (#11) -->
+    <!-- Live Access Feed, Now just a navigation button (#11) -->
     <a href="/feed.html" class="luxury-panel rounded-2xl p-5 flex items-center justify-between group transition-all hover:border-neutral-700 cursor-pointer no-underline">
       <div class="flex items-center gap-3">
         <span class="w-8 h-8 rounded-lg flex items-center justify-center bg-neutral-900 border border-neutral-800 text-neutral-400 group-hover:text-white transition-all">
@@ -221,7 +221,7 @@
       </div>
     </a>
 
-    <!-- Virtual Door — Software replacement for servo motor -->
+    <!-- Virtual Door, Software replacement for servo motor -->
     <a href="/door.html" class="luxury-panel rounded-2xl p-5 flex items-center justify-between group transition-all hover:border-neutral-700 cursor-pointer no-underline">
       <div class="flex items-center gap-3">
         <span class="w-8 h-8 rounded-lg flex items-center justify-center bg-neutral-900 border border-neutral-800 text-neutral-400 group-hover:text-white transition-all">
@@ -268,7 +268,7 @@
     brightnessSlider.addEventListener('input', (e) => {
       currentBrightness = parseInt(e.target.value);
       brightnessDisplay.textContent = `${currentBrightness}%`;
-      
+
       // Debounce: send the brightness update 150ms after the user stops dragging
       clearTimeout(sliderDebounce);
       sliderDebounce = setTimeout(() => {
@@ -352,7 +352,7 @@
       }
     }
 
-    // Bedtime activation (#2, #7 — warm color, low brightness)
+    // Bedtime activation (#2, #7, warm color, low brightness)
     function activateBedtime() {
       setActiveModeUI(null);
       setActiveColorUI(null);
@@ -380,7 +380,7 @@
 
       // Clamp brightness to 85 max to protect ESP32 from overheating
       const clampedBrightness = Math.min(brightness, 85);
-      
+
       // Update global tracking state
       lastSelectedScene = scene;
 
@@ -478,7 +478,7 @@
 
     // ─── Voice Command Engine (regex word-boundary matching) ─────────────────
     // Uses \b word boundaries so "lights off" matches "off", but "offline" won't.
-    // Priority order matters — checked top to bottom, first match wins.
+    // Priority order matters, checked top to bottom, first match wins.
     function processSpeech(speech) {
 
       // ── Tier 1: Specific phrases (checked first to avoid partial word conflicts) ──
@@ -520,13 +520,13 @@
 
       // ── Tier 3: Power on/off (word boundary so "orange" doesn't trigger "on") ──
 
-      // OFF — matches: "off", "lights off", "turn off", "turn off the lights", "switch off"
+      // OFF, matches: "off", "lights off", "turn off", "turn off the lights", "switch off"
       if (/\boff\b/.test(speech)) {
         sendCommand('OFF', 0, "Voice Command", speech);
         return;
       }
 
-      // ON — matches: "on", "lights on", "turn on", "turn on the lights", "switch on"
+      // ON, matches: "on", "lights on", "turn on", "turn on the lights", "switch on"
       // \bon\b safely excludes words like "orange", "only", "console"
       if (/\bon\b/.test(speech)) {
         sendCommand('ON', 85, "Voice Command", speech);
@@ -583,15 +583,15 @@
       if (event) event.preventDefault();
       if (isReconnecting) return;
       isReconnecting = true;
-      
+
       const mqttBadge = document.getElementById('mqtt-badge');
       mqttBadge.className = 'px-2 py-1 text-[9px] font-bold tracking-wider rounded-md bg-neutral-900 text-amber-400 border border-amber-950/80 flex items-center gap-1.5 transition-all font-mono';
       mqttBadge.innerHTML = '<span id="mqtt-dot" class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-spin"></span> CONNECTING...';
       showToast('CONNECTING TO MQTT BROKER...', 'success');
-      
+
       try {
         const res = await fetch('/api/mqtt-reconnect', { method: 'POST' });
-        
+
         let data = {};
         const contentType = res.headers.get('content-type');
         if (contentType && contentType.includes('application/json')) {
@@ -599,7 +599,7 @@
         } else {
           throw new Error(`Server returned non-JSON response (Status ${res.status}). Did you restart the server?`);
         }
-        
+
         if (res.ok && data.connected) {
           showToast('MQTT CONNECTED!', 'success');
         } else {
